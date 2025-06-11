@@ -1,0 +1,342 @@
+<div class="shadow-div" [ngStyle]="{'display': visibleEditLotsDialog ? 'inline': 'none', 'opacity': visibleEditLotsDialog ? '1': '0'}" (click)="closeEditLotsDialog()"></div>
+<div class="shadow-div" [ngStyle]="{'display': visibleDeleteLotsDialog ? 'inline': 'none', 'opacity': visibleDeleteLotsDialog ? '1': '0'}" (click)="closeDeleteLotsDialog()"></div>
+<div class="shadow-div" [ngStyle]="{'display': visibleInsertLotsDialog ? 'inline': 'none', 'opacity': visibleInsertLotsDialog ? '1': '0'}" (click)="closeInsertLotsDialog()"></div>
+<div class="all-container">
+    <app-header>
+    </app-header>
+    <div class="card m-1">
+        <div class="grid main-div">
+            <div class="col-12">
+                <p-dialog header="Cadastrar Lote" class="main-div insert-dialog" [modal]="false"
+                    [(visible)]="visibleInsertLotsDialog" (onHide)="closeInsertLotsDialog()">
+                    <form [formGroup]="lotsCreateForm" class="container-form-dialog">
+                        <div class="form-element mt-3">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="codigoBarra" formControlName="codigoBarra" class="input-custom" />
+                                    <label for="codigoBarra">Código de Barra</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-calendar'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <p-datepicker 
+                                        formControlName="dataFabricacao" 
+                                        inputId="buttondisplay" 
+                                        [showOnFocus]="true" 
+                                        inputId="dataFabricacao" 
+                                        dateFormat="dd/mm/yy" 
+                                    />
+                                    <label for="dataFabricacao">Data de Fabricação</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-calendar'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <p-datepicker 
+                                        formControlName="dataValidade" 
+                                        inputId="buttondisplay" 
+                                        [showOnFocus]="true" 
+                                        inputId="dataValidade" 
+                                        dateFormat="dd/mm/yy" 
+                                    />
+                                    <label for="dataValidade">Data de Validade</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="quantidade" formControlName="quantidade"
+                                        class="input-custom" />
+                                    <label for="quantidade">Quantidade</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="fornecedor" formControlName="fornecedor"
+                                        class="input-custom" />
+                                    <label for="fornecedor">Fornecedor</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="produtoId" formControlName="produtoId"
+                                        class="input-custom" />
+                                    <label for="produtoId">Id Produto</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                        </div>
+                        <div class="form-element">
+                            <button pButton pRipple label="Cadastrar" type="submit"
+                                [style]="{backgroundColor: 'var(--primary-color)', borderColor: 'var(--primary-color)'}" (click)="createLot()">
+                            </button>
+                        </div>
+                    </form>
+                </p-dialog>
+                <p-dialog header="Editar Lote" class="main-div insert-dialog" [modal]="false" [(visible)]="visibleEditLotsDialog" (onHide)="closeEditLotsDialog()">
+                    <form [formGroup]="lotsEditForm" class="container-form-dialog">
+                        <div class="form-element mt-3">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="codigoBarra" formControlName="codigoBarra" class="input-custom" />
+                                    <label for="codigoBarra">Código de Barra</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-calendar'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <p-datepicker 
+                                        formControlName="dataFabricacao" 
+                                        inputId="buttondisplay" 
+                                        [showOnFocus]="true" 
+                                        inputId="dataFabricacao" 
+                                        dateFormat="dd/mm/yy" 
+                                    />
+                                    <label for="dataFabricacao">Data de Fabricação</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-calendar'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <p-datepicker 
+                                        formControlName="dataValidade" 
+                                        inputId="buttondisplay" 
+                                        [showOnFocus]="true" 
+                                        inputId="dataValidade" 
+                                        dateFormat="dd/mm/yy" 
+                                    />
+                                    <label for="dataValidade">Data de Validade</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="quantidade" formControlName="quantidade"
+                                        class="input-custom" />
+                                    <label for="quantidade">Quantidade</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="fornecedor" formControlName="fornecedor"
+                                        class="input-custom" />
+                                    <label for="fornecedor">Fornecedor</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="produtoId" formControlName="produtoId"
+                                        class="input-custom" />
+                                    <label for="produtoId">Id Produto</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                        </div>
+                        <div class="form-element">
+                            <button pButton pRipple label="Editar" type="submit"
+                                [style]="{backgroundColor: 'var(--primary-color)', borderColor: 'var(--primary-color)'}" (click)="updatetLot()">
+                            </button>
+                        </div>
+                    </form>
+                </p-dialog>
+                <p-dialog header="Excluir Lote" class="main-div insert-dialog" [modal]="false"
+                    [(visible)]="visibleDeleteLotsDialog" (onHide)="closeDeleteLotsDialog()">
+                    <div>
+                        <h3 class="delete-confirmation-title">Tem certeza que deseja excluir o lote
+                            "{{this.targetToDelete?.id}}"?</h3>
+                        <div class="flex justify-content-center align-items-center gap-3 mt-3">
+                            <button pButton pRipple label="Sair" type="submit" severity="warn" (click)="closeDeleteLotsDialog()">
+                            </button>
+                            <button pButton pRipple label="Excluir" type="submit" severity="danger" (click)="deleteLot()">
+                            </button>
+                        </div>
+                    </div>
+                </p-dialog>
+                <p-card styleClass="shadow-3 no-border-radius" class="card" [style]="{color: 'var(--primary-color)'}"
+                    header="Lotes">
+                    @if (isLoadingAllLots) {
+                    <div class="representant-loading">
+                        <app-loading></app-loading>
+                    </div>
+                    } @else {
+                    <div class="card mt-4" [style]="{minHeight: '300px'}">
+                        <div class="right">
+                            <button pButton pRipple label="Adicionar" severity="success" icon="pi pi-plus" class="p-button-success first-button mr-3" (click)="openInsertLotsDialog()">
+                            </button>
+                        </div>
+
+                        <p-table 
+                            #dt1 
+                            [value]="allLots"
+                            [globalFilterFields]="['codigoBarra', 'dataFabricacao', 'dataValidade', 'quantidade', 'fornecedor', 'produtoId']"
+                            dataKey="id" 
+                            [tableStyle]="{ 'min-width': '50rem' }" 
+                            [rows]="10" 
+                            [paginator]="true"
+                            [scrollable]="true" 
+                            scrollHeight="600px" 
+                            [responsive]="true" 
+                            [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Mostrando {first} a {last} de um total de {totalRecords} lotes."
+                        >
+                            <ng-template #caption>
+                                <div class="search-bar">
+                                    <p-button label="Limpar" [outlined]="true" icon="pi pi-filter-slash"
+                                        (click)="clear(dt1)" />
+                                    <p-iconfield iconPosition="right" class="ml-auto search-area">
+                                        <p-inputicon>
+                                            <i class="pi pi-search"></i>
+                                        </p-inputicon>
+                                        <input pInputText [(ngModel)]="searchValue" type="text"
+                                            (input)="filterGlobal($event, dt1)" placeholder="Procurar Lotes..." />
+                                    </p-iconfield>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="id" style="min-width: 10rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                ID <p-sortIcon field="id" />
+                                            </span>
+                                            <p-columnFilter type="text" field="id" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="codigoBarra" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Código de Barra <p-sortIcon field="codigoBarra" />
+                                            </span>
+                                            <p-columnFilter type="text" field="codigoBarra" display="menu" matchMode="contains"
+                                                [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="dataFabricacao" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Data de Fabricação <p-sortIcon field="dataFabricacao" />
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="dataValidade" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Data de Validade <p-sortIcon field="dataValidade" />
+                                            </span>
+                                        </div>
+                                    </th>
+                                     <th pSortableColumn="quantidade" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Quantidade <p-sortIcon field="quantidade" />
+                                            </span>
+                                            <p-columnFilter type="text" field="quantidade" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                     <th pSortableColumn="fornecedor" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Fornecedor <p-sortIcon field="fornecedor" />
+                                            </span>
+                                            <p-columnFilter type="text" field="fornecedor" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                     <th pSortableColumn="produtoId" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Id do Produto <p-sortIcon field="produtoId" />
+                                            </span>
+                                            <p-columnFilter type="text" field="produtoId" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="flex justify-content-center align-items-center">
+                                            Ações
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-item>
+                                <tr [pSelectableRow]="item">
+                                    <td>
+                                        {{ item.id }}
+                                    </td>
+                                    <td>
+                                        {{ item.codigoBarra }}
+                                    </td>
+                                    <td>
+                                        {{ item.dataFabricacao | date:'dd/MM/yyyy' }}
+                                    </td>
+                                    <td>
+                                        {{ item.dataValidade | date:'dd/MM/yyyy' }}
+                                    </td>
+                                    <td>
+                                        {{ item.quantidade }}
+                                    </td>
+                                    <td>
+                                        {{ item.fornecedor }}
+                                    </td>
+                                    <td>
+                                        {{ item.produtoId }}
+                                    </td>
+                                    <td>
+                                        <div class="flex justify-content-center align-items-center gap-2">
+                                            <button pButton pRipple severity="info" icon="pi pi-pencil" [rounded]="true" (click)="openEditLotsDialog(item)">
+                                            </button>
+                                            <button pButton pRipple severity="danger" icon="pi pi-trash" [rounded]="true" (click)="openDeleteLotsDialog(item)">
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="4">Nenhum lote encontrado.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                    }
+                </p-card>
+            </div>
+        </div>
+    </div>
+</div>

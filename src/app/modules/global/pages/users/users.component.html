@@ -1,0 +1,227 @@
+<div class="shadow-div" [ngStyle]="{'display': visibleEditUserDialog ? 'inline': 'none', 'opacity': visibleEditUserDialog ? '1': '0'}" (click)="closeEditUserDialog()"></div>
+<div class="shadow-div" [ngStyle]="{'display': visibleDeleteUserDialog ? 'inline': 'none', 'opacity': visibleDeleteUserDialog ? '1': '0'}" (click)="closeDeleteUserDialog()"></div>
+<div class="shadow-div" [ngStyle]="{'display': visibleInsertUserDialog ? 'inline': 'none', 'opacity': visibleInsertUserDialog ? '1': '0'}" (click)="closeInsertUserDialog()"></div>
+<div class="all-container">
+    <app-header>
+    </app-header>
+    <div class="card m-1">
+        <div class="grid main-div">
+            <div class="col-12">
+                <p-dialog header="Cadastrar Usuário" class="main-div insert-dialog" [modal]="false"
+                    [(visible)]="visibleInsertUserDialog" (onHide)="closeInsertUserDialog()">
+                    <form [formGroup]="userCreateForm" class="container-form-dialog">
+                        <div class="form-element mt-3">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="nome" formControlName="nome" class="input-custom" />
+                                    <label for="nome">Nome</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="sobrenome" formControlName="sobrenome" class="input-custom" />
+                                    <label for="sobrenome">Sobrenome</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="email" formControlName="email"
+                                        class="input-custom" />
+                                    <label for="email">E-mail</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                        </div>
+                        <div class="form-element">
+                            <button pButton pRipple label="Cadastrar" type="submit"
+                                [style]="{backgroundColor: 'var(--primary-color)', borderColor: 'var(--primary-color)'}" (click)="createUser()">
+                            </button>
+                        </div>
+                    </form>
+                </p-dialog>
+                <p-dialog header="Editar Usuário" class="main-div insert-dialog" [modal]="false" [(visible)]="visibleEditUserDialog" (onHide)="closeEditUserDialog()">
+                    <form [formGroup]="userEditForm" class="container-form-dialog">
+                        <div class="form-element mt-3">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="nome" formControlName="nome" class="input-custom" />
+                                    <label for="nome">Nome</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="sobrenome" formControlName="sobrenome" class="input-custom" />
+                                    <label for="sobrenome">Sobrenome</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="email" formControlName="email"
+                                        class="input-custom" />
+                                    <label for="email">E-mail</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                        </div>
+                        <div class="form-element">
+                            <button pButton pRipple label="Editar" type="submit"
+                                [style]="{backgroundColor: 'var(--primary-color)', borderColor: 'var(--primary-color)'}" (click)="updatetUser()">
+                            </button>
+                        </div>
+                    </form>
+                </p-dialog>
+                <p-dialog header="Excluir Usuário" class="main-div insert-dialog" [modal]="false"
+                    [(visible)]="visibleDeleteUserDialog" (onHide)="closeDeleteUserDialog()">
+                    <div>
+                        <h3 class="delete-confirmation-title">Tem certeza que deseja excluir o usuário
+                            "{{this.targetToDelete?.nome}}"?</h3>
+                        <div class="flex justify-content-center align-items-center gap-3 mt-3">
+                            <button pButton pRipple label="Sair" type="submit" severity="warn" (click)="closeDeleteUserDialog()">
+                            </button>
+                            <button pButton pRipple label="Excluir" type="submit" severity="danger" (click)="deleteUser()">
+                            </button>
+                        </div>
+                    </div>
+                </p-dialog>
+                <p-card styleClass="shadow-3 no-border-radius" class="card" [style]="{color: 'var(--primary-color)'}"
+                    header="Usuários">
+                    @if (isLoadingAllUsers) {
+                    <div class="representant-loading">
+                        <app-loading></app-loading>
+                    </div>
+                    } @else {
+                    <div class="card mt-4" [style]="{minHeight: '300px'}">
+                        <div class="right">
+                            <button pButton pRipple label="Adicionar" severity="success" icon="pi pi-plus" class="p-button-success first-button mr-3" (click)="openInsertUserDialog()">
+                            </button>
+                        </div>
+
+                        <p-table 
+                            #dt1 
+                            [value]="allUsers"
+                            [globalFilterFields]="['id', 'nome', 'sobrenome', 'email']"
+                            dataKey="id" 
+                            [tableStyle]="{ 'min-width': '50rem' }" 
+                            [rows]="10" 
+                            [paginator]="true"
+                            [scrollable]="true" 
+                            scrollHeight="600px" 
+                            [responsive]="true" 
+                            [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Mostrando {first} a {last} de um total de {totalRecords} usuários."
+                        >
+                            <ng-template #caption>
+                                <div class="search-bar">
+                                    <p-button label="Limpar" [outlined]="true" icon="pi pi-filter-slash"
+                                        (click)="clear(dt1)" />
+                                    <p-iconfield iconPosition="right" class="ml-auto search-area">
+                                        <p-inputicon>
+                                            <i class="pi pi-search"></i>
+                                        </p-inputicon>
+                                        <input pInputText [(ngModel)]="searchValue" type="text"
+                                            (input)="filterGlobal($event, dt1)" placeholder="Procurar Usuário..." />
+                                    </p-iconfield>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="id" style="min-width: 10rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                ID <p-sortIcon field="id" />
+                                            </span>
+                                            <p-columnFilter type="text" field="id" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="nome" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Nome <p-sortIcon field="nome" />
+                                            </span>
+                                            <p-columnFilter type="text" field="nome" display="menu" matchMode="contains"
+                                                [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="sobrenome" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Sobrenome <p-sortIcon field="sobrenome" />
+                                            </span>
+                                            <p-columnFilter type="text" field="sobrenome" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="email" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Email <p-sortIcon field="email" />
+                                            </span>
+                                            <p-columnFilter type="text" field="email" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="flex justify-content-center align-items-center">
+                                            Ações
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-item>
+                                <tr [pSelectableRow]="item">
+                                    <td>
+                                        {{ item.id }}
+                                    </td>
+                                    <td>
+                                        {{ item.nome }}
+                                    </td>
+                                    <td>
+                                        {{ item.sobrenome }}
+                                    </td>
+                                    <td>
+                                        {{ item.email }}
+                                    </td>
+                                    <td>
+                                        <div class="flex justify-content-center align-items-center gap-2">
+                                            <button pButton pRipple severity="info" icon="pi pi-pencil" [rounded]="true" (click)="openEditUserDialog(item)">
+                                            </button>
+                                            <button pButton pRipple severity="danger" icon="pi pi-trash" [rounded]="true" (click)="openDeleteUserDialog(item)">
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="4">Nenhum usuário encontrado.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                    }
+                </p-card>
+            </div>
+        </div>
+    </div>
+</div>

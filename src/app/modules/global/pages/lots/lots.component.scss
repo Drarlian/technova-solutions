@@ -1,0 +1,138 @@
+.container-form-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 8px;
+    justify-content: center;
+
+    // width: 50%;
+
+    .form-element {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .input-group {
+            width: 100%;
+
+            .input-custom {
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px;
+            }
+        }
+
+        .input-invalid {
+            border-color: rgb(202, 35, 35);
+        }
+
+        input {
+            width: 400px;
+            height: 50px;
+        }
+
+        button {
+            background-color: #053;
+            color: white;
+            border-color: #053;
+            border-style: none;
+            width: 100%;
+            height: 50px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+
+        .form-element {
+            input {
+                width: 100%;
+            }
+        }
+    }
+}
+
+:host ::ng-deep .p-dialog-title {
+    color: var(--primary-color);
+}
+
+
+.search-bar {
+    display: flex;
+    // justify-content: end;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+        display: flex;
+        align-items: center;
+        width: 350px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-bar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        gap: 1rem;
+    }
+}
+
+.right {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    width: 100%;
+    margin-bottom: 1.3rem;
+}
+
+.delete-confirmation-title {
+    font-weight: 500;
+}
+
+.disabled-row {
+    pointer-events: none;
+    /* Impede interação como cliques */
+    opacity: 0.6;
+    /* Reduz a opacidade para dar aparência desabilitada */
+}
+
+/* Altera a cor de fundo do checkbox quando marcado */
+::ng-deep .target .p-checkbox-box.p-highlight {
+    background-color: #ff0000;
+    /* Substitua pela cor desejada */
+    border-color: #ff0000;
+    /* Ajuste a borda para corresponder à cor de fundo */
+}
+
+/* Altera a cor de fundo do checkbox quando não marcado */
+::ng-deep .target .p-checkbox-box {
+    // background-color: #f0f0f0; /* Substitua pela cor desejada para o estado desmarcado */
+    border-color: transparent;
+    /* Ajuste a borda para o estado desmarcado */
+}
+
+:host ::ng-deep .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+    box-shadow: none;
+}
+
+:host ::ng-deep .p-datepicker {
+    display: flex;
+    width: 100% !important;
+    height: 50px;
+}
+
+:host ::ng-deep .p-datepicker-input {
+    width: 400px !important;
+    height: 50px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+
+    @media (max-width: 600px) {
+        width: 100% !important;
+    }
+}
+

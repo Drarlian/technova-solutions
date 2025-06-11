@@ -1,0 +1,296 @@
+<div class="shadow-div" [ngStyle]="{'display': visibleEditProductDialog ? 'inline': 'none', 'opacity': visibleEditProductDialog ? '1': '0'}" (click)="closeEditProductDialog()"></div>
+<div class="shadow-div" [ngStyle]="{'display': visibleDeleteProductDialog ? 'inline': 'none', 'opacity': visibleDeleteProductDialog ? '1': '0'}" (click)="closeDeleteProductDialog()"></div>
+<div class="shadow-div" [ngStyle]="{'display': visibleInsertProductDialog ? 'inline': 'none', 'opacity': visibleInsertProductDialog ? '1': '0'}" (click)="closeInsertProductDialog()"></div>
+<div class="all-container">
+    <app-header>
+    </app-header>
+    <div class="card m-1">
+        <div class="grid main-div">
+            <div class="col-12">
+                <p-dialog header="Cadastrar Produto" class="main-div insert-dialog" [modal]="false"
+                    [(visible)]="visibleInsertProductDialog" (onHide)="closeInsertProductDialog()">
+                    <form [formGroup]="productCreateForm" class="container-form-dialog">
+                        <div class="form-element mt-3">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="nome" formControlName="nome" class="input-custom" />
+                                    <label for="nome">Nome</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="descricao" formControlName="descricao" class="input-custom" />
+                                    <label for="descricao">Descrição</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="fabricante" formControlName="fabricante"
+                                        class="input-custom" />
+                                    <label for="fabricante">Fabricante</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="classificacao" formControlName="classificacao"
+                                        class="input-custom" />
+                                    <label for="classificacao">Classificação</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="especificacao" formControlName="especificacao"
+                                        class="input-custom" />
+                                    <label for="especificacao">Especificação</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                        </div>
+                        <div class="form-element">
+                            <button pButton pRipple label="Cadastrar" type="submit"
+                                [style]="{backgroundColor: 'var(--primary-color)', borderColor: 'var(--primary-color)'}" (click)="createProduct()">
+                            </button>
+                        </div>
+                    </form>
+                </p-dialog>
+                <p-dialog header="Editar Produto" class="main-div insert-dialog" [modal]="false" [(visible)]="visibleEditProductDialog" (onHide)="closeEditProductDialog()">
+                    <form [formGroup]="productEditForm" class="container-form-dialog">
+                        <div class="form-element mt-3">
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="nome" formControlName="nome" class="input-custom" />
+                                    <label for="nome">Nome</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="descricao" formControlName="descricao" class="input-custom" />
+                                    <label for="descricao">Descrição</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="fabricante" formControlName="fabricante"
+                                        class="input-custom" />
+                                    <label for="fabricante">Fabricante</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="classificacao" formControlName="classificacao"
+                                        class="input-custom" />
+                                    <label for="classificacao">Classificação</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                            <p-inputGroup>
+                                <p-inputGroupAddon>
+                                    <i class='pi pi-address-book'></i>
+                                </p-inputGroupAddon>
+                                <p-floatLabel class="input-group">
+                                    <input pInputText id="especificacao" formControlName="especificacao"
+                                        class="input-custom" />
+                                    <label for="especificacao">Especificação</label>
+                                </p-floatLabel>
+                            </p-inputGroup>
+                        </div>
+                        <div class="form-element">
+                            <button pButton pRipple label="Editar" type="submit"
+                                [style]="{backgroundColor: 'var(--primary-color)', borderColor: 'var(--primary-color)'}" (click)="updatetProduct()">
+                            </button>
+                        </div>
+                    </form>
+                </p-dialog>
+                <p-dialog header="Excluir Produto" class="main-div insert-dialog" [modal]="false"
+                    [(visible)]="visibleDeleteProductDialog" (onHide)="closeDeleteProductDialog()">
+                    <div>
+                        <h3 class="delete-confirmation-title">Tem certeza que deseja excluir o produto
+                            "{{this.targetToDelete?.nome}}"?</h3>
+                        <div class="flex justify-content-center align-items-center gap-3 mt-3">
+                            <button pButton pRipple label="Sair" type="submit" severity="warn" (click)="closeDeleteProductDialog()">
+                            </button>
+                            <button pButton pRipple label="Excluir" type="submit" severity="danger" (click)="deleteProduct()">
+                            </button>
+                        </div>
+                    </div>
+                </p-dialog>
+                <p-card styleClass="shadow-3 no-border-radius" class="card" [style]="{color: 'var(--primary-color)'}"
+                    header="Produtos">
+                    @if (isLoadingAllProducts) {
+                    <div class="representant-loading">
+                        <app-loading></app-loading>
+                    </div>
+                    } @else {
+                    <div class="card mt-4" [style]="{minHeight: '300px'}">
+                        <div class="right">
+                            <button pButton pRipple label="Adicionar" severity="success" icon="pi pi-plus" (click)="openInsertProductDialog()"
+                                class="p-button-success first-button mr-3">
+                            </button>
+                        </div>
+
+                        <p-table 
+                            #dt1 
+                            [value]="allProducts"
+                            [globalFilterFields]="['id', 'nome', 'descricao', 'fabricante', 'classificacao', 'especificacao']"
+                            dataKey="id" 
+                            [tableStyle]="{ 'min-width': '50rem' }" 
+                            [rows]="10" 
+                            [paginator]="true"
+                            [scrollable]="true" 
+                            scrollHeight="600px" 
+                            [responsive]="true" 
+                            [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Mostrando {first} a {last} de um total de {totalRecords} produtos."
+                        >
+                            <ng-template #caption>
+                                <div class="search-bar">
+                                    <p-button label="Limpar" [outlined]="true" icon="pi pi-filter-slash"
+                                        (click)="clear(dt1)" />
+                                    <p-iconfield iconPosition="right" class="ml-auto search-area">
+                                        <p-inputicon>
+                                            <i class="pi pi-search"></i>
+                                        </p-inputicon>
+                                        <input pInputText [(ngModel)]="searchValue" type="text"
+                                            (input)="filterGlobal($event, dt1)" placeholder="Procurar Produto..." />
+                                    </p-iconfield>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="id" style="min-width: 10rem">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                ID <p-sortIcon field="id" />
+                                            </span>
+                                            <p-columnFilter type="text" field="id" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="nome" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Nome <p-sortIcon field="nome" />
+                                            </span>
+                                            <p-columnFilter type="text" field="nome" display="menu" matchMode="contains"
+                                                [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="descricao" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Descrição <p-sortIcon field="descricao" />
+                                            </span>
+                                            <p-columnFilter type="text" field="descricao" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="fabricante" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Fabricante <p-sortIcon field="fabricante" />
+                                            </span>
+                                            <p-columnFilter type="text" field="fabricante" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="classificacao" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Classificação <p-sortIcon field="classificacao" />
+                                            </span>
+                                            <p-columnFilter type="text" field="classificacao" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th pSortableColumn="especificacao" style="min-width: 12rem;">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <span>
+                                                Especificação <p-sortIcon field="especificacao" />
+                                            </span>
+                                            <p-columnFilter type="text" field="especificacao" display="menu"
+                                                matchMode="contains" [showMatchModes]="false" [showOperator]="false"
+                                                [showAddButton]="false"></p-columnFilter>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="flex justify-content-center align-items-center">
+                                            Ações
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-item>
+                                <tr [pSelectableRow]="item">
+                                    <td>
+                                        {{ item.id }}
+                                    </td>
+                                    <td>
+                                        {{ item.nome }}
+                                    </td>
+                                    <td>
+                                        {{ item.descricao }}
+                                    </td>
+                                    <td>
+                                        {{ item.fabricante }}
+                                    </td>
+                                    <td>
+                                        {{ item.classificacao }}
+                                    </td>
+                                    <td>
+                                        {{ item.especificacao }}
+                                    </td>
+                                    <td>
+                                        <div class="flex justify-content-center align-items-center gap-2">
+                                            <button pButton pRipple severity="info" icon="pi pi-pencil" [rounded]="true"
+                                                (click)="openEditProductDialog(item)">
+                                            </button>
+                                            <button pButton pRipple severity="danger" icon="pi pi-trash"
+                                                [rounded]="true" (click)="openDeleteProductDialog(item)">
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="4">Nenhum produto encontrado.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                    }
+                </p-card>
+            </div>
+        </div>
+    </div>
+</div>
